@@ -15,6 +15,9 @@
 		09E63E7B2622E44C002E68C5 /* DatePickerView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E63E7A2622E44C002E68C5 /* DatePickerView1.swift */; };
 		09E63E7F2622E5CA002E68C5 /* DatePickerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E63E7E2622E5CA002E68C5 /* DatePickerView2.swift */; };
 		09E63E822622E809002E68C5 /* DatePickerView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E63E812622E809002E68C5 /* DatePickerView3.swift */; };
+		09E63E862622F4E9002E68C5 /* DateComponentView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E63E852622F4E9002E68C5 /* DateComponentView1.swift */; };
+		09E63E8A2622F7CF002E68C5 /* DateComponentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E63E892622F7CF002E68C5 /* DateComponentView2.swift */; };
+		09E63E8D2622FC3A002E68C5 /* DateComponentView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E63E8C2622FC3A002E68C5 /* DateComponentView3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		09E63E7A2622E44C002E68C5 /* DatePickerView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView1.swift; sourceTree = "<group>"; };
 		09E63E7E2622E5CA002E68C5 /* DatePickerView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView2.swift; sourceTree = "<group>"; };
 		09E63E812622E809002E68C5 /* DatePickerView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView3.swift; sourceTree = "<group>"; };
+		09E63E852622F4E9002E68C5 /* DateComponentView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponentView1.swift; sourceTree = "<group>"; };
+		09E63E892622F7CF002E68C5 /* DateComponentView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponentView2.swift; sourceTree = "<group>"; };
+		09E63E8C2622FC3A002E68C5 /* DateComponentView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponentView3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				09E63E792622E41D002E68C5 /* DatePickerViews */,
+				09E63E842622F4C7002E68C5 /* DateComponentViews */,
 				098384F12622CD6A00E80780 /* StepperView.swift */,
 			);
 			path = Day26;
@@ -95,6 +102,16 @@
 				09E63E812622E809002E68C5 /* DatePickerView3.swift */,
 			);
 			path = DatePickerViews;
+			sourceTree = "<group>";
+		};
+		09E63E842622F4C7002E68C5 /* DateComponentViews */ = {
+			isa = PBXGroup;
+			children = (
+				09E63E852622F4E9002E68C5 /* DateComponentView1.swift */,
+				09E63E892622F7CF002E68C5 /* DateComponentView2.swift */,
+				09E63E8C2622FC3A002E68C5 /* DateComponentView3.swift */,
+			);
+			path = DateComponentViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,11 +184,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				09E63E822622E809002E68C5 /* DatePickerView3.swift in Sources */,
+				09E63E8A2622F7CF002E68C5 /* DateComponentView2.swift in Sources */,
+				09E63E862622F4E9002E68C5 /* DateComponentView1.swift in Sources */,
 				09E63E7B2622E44C002E68C5 /* DatePickerView1.swift in Sources */,
 				098384E42622CA3300E80780 /* ContentView.swift in Sources */,
 				09E63E7F2622E5CA002E68C5 /* DatePickerView2.swift in Sources */,
 				098384F22622CD6A00E80780 /* StepperView.swift in Sources */,
 				098384E22622CA3300E80780 /* BetterRestApp.swift in Sources */,
+				09E63E8D2622FC3A002E68C5 /* DateComponentView3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
