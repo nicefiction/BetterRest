@@ -1,21 +1,32 @@
-//
-//  ContentView.swift
-//  BetterRest
-//
-//  Created by Olivier Van hamme on 11/04/2021.
-//
+// MARK: ContentView.swift
 
 import SwiftUI
 
+
+
 struct ContentView: View {
+    
+     // /////////////////////////
+    //  MARK: COMPUTED PROPERTIES
+    
     var body: some View {
+        
         Text("Hello, world!")
             .padding()
     }
 }
 
+
+
+
+
+ // ///////////////
+//  MARK: PREVIEWS
+
 struct ContentView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        ContentView()
+        
+        ContentView().previewDevice("iPhone 12 Pro")
     }
 }
