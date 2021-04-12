@@ -36,17 +36,19 @@ struct ContentView: View {
         
         NavigationView {
             Form {
-                VStack(alignment: .leading) {
-                    Text("Wake Up Time")
-                        .font(.headline)
+                Section(header : Text("Wake Up Time")) {
+                // VStack(alignment: .leading) {
+                    // Text("Wake Up Time")
+                        // .font(.headline)
                     DatePicker("I would like to wake up at :" ,
                                selection : $wakeUpTime ,
                                displayedComponents : .hourAndMinute)
                 }
                 
-                VStack(alignment: .leading) {
-                    Text("Desired Amount of Sleep")
-                        .font(.headline)
+                Section(header : Text("Desired Amount of Sleep")) {
+                // VStack(alignment: .leading) {
+                    // Text("Desired Amount of Sleep")
+                        // .font(.headline)
                     Stepper(value : $sleepAmount ,
                             in : 4...12 ,
                             step : 0.25) {
@@ -54,14 +56,28 @@ struct ContentView: View {
                     }
                 }
                 
-                VStack(alignment : .leading) {
-                    Text("Daily Coffee Intake")
-                        .font(.headline)
+                Section(header : Text("Daily Coffee Intake")) {
+                // VStack(alignment : .leading) {
+                    // Text("Daily Coffee Intake")
+                        // .font(.headline)
                     Stepper(value : $coffeeAmount ,
                             in : 0...20 ,
                             step : 1 ) {
-                        Text("Today I had \(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee ☕️")
+                        Text("\(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee ☕️")
                     }
+                }
+                
+                Section(header : Text("Daily Coffee Intake")) {
+                    Picker(selection : $coffeeAmount ,
+                           label : Text("\(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee ☕️")) {
+                        ForEach(0..<21) { (number: Int) in
+                            Text("\(number)")
+                        }
+                    }
+                }
+                
+                Section(header : Text("Your Recommended Bedtime")) {
+                    
                 }
             }
             .navigationBarTitle(Text("Better Rest"))
@@ -94,28 +110,31 @@ struct ContentView: View {
         // STEP 1 •  create an instance of the SleepCalculator class :
         let sleepCalculatorModel = SleepCalculator()
         
-        // STEP 2 • Calculate the wake time :
-        let dateComponents =
-            Calendar.current.dateComponents([.hour , .minute],
+        // STEP 2 • Store the individual parts of a date as separate values :
+        let components =
+            Calendar.current.dateComponents([.hour , .minute] ,
                                             from : wakeUpTime)
-        let hourInSeconds = (dateComponents.hour ?? 0) * 60 * 60
-        let minuteInSeconds = (dateComponents.minute ?? 0) * 60
+        let hourInSeconds = (components.hour ?? 0) * 60 * 60
+        let minuteInSeconds = (components.minute ?? 0) * 60
         
-        // STEP 3 • Feed our values into Core ML and see what comes out . This might fail if Core ML hits some sort of problem , so we need to use do and catch :
+        // STEP 3 • Feed our values into Core ML and see what comes out . Since this might fail , we need to use do and catch :
         do {
             let sleepPrediction =
-                try sleepCalculatorModel.prediction(wake: Double(hourInSeconds + minuteInSeconds) ,
-                                                    estimatedSleep : sleepAmount ,
-                                                    coffee : Double(coffeeAmount))
+                try sleepCalculatorModel.prediction(
+                    // STEP 4 • Calculate the wake time :
+                    wake : Double(hourInSeconds + minuteInSeconds) ,
+                    estimatedSleep : sleepAmount ,
+                    coffee : Double(coffeeAmount)
+                )
             
-            // STEP 4 • Convert the sleep prediction to the time they should go to bed :
+            // STEP 5 • Convert the sleep prediction to the time they should go to bed :
             let sleepTime = wakeUpTime - sleepPrediction.actualSleep
             
-            // STEP 5 • Show the bedtime in a human readable format to the user :
+            // STEP 6 • Convert the date to a String using DateFormatter() :
             let dateFormatter = DateFormatter()
             dateFormatter.timeStyle = .short
             alertTitle = "Your ideal bedtime is ..."
-            alertMessage = dateFormatter.string(from: sleepTime)
+            alertMessage = dateFormatter.string(from : sleepTime)
             
         } catch {
             alertTitle = "Error"

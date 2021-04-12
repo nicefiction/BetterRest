@@ -38,7 +38,11 @@ struct DateComponentView1: View {
         let date = Calendar.current.date(from : dateComponents) ?? Date()
         
         
-        return Text("\(date)")
+        return VStack {
+            Text("\(dateComponents)")
+            Spacer()
+            Text("\(date)")
+        }
     }
 }
 

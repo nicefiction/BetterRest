@@ -41,9 +41,11 @@ struct DateComponentView2: View {
     var body: some View {
         
         let dateComponents =
-            Calendar.current.dateComponents([.hour , .minute] ,
-                                            from : Date() ,
-                                            to : tomorrow)
+            Calendar.current.dateComponents(
+                [.hour , .minute , .second , .weekday] ,
+                from : Date() ,
+                to : tomorrow
+            )
         
         let dateHour = dateComponents.hour ?? 0
         let dateMinutes = dateComponents.minute ?? 0
@@ -53,10 +55,10 @@ struct DateComponentView2: View {
             Text("\(dateComponents)")
             Spacer()
             Text("\(dateHour) : \(dateMinutes)")
+            Spacer()
             DatePicker("Wake me up at :" ,
                        selection: $wakeUpDate ,
                        displayedComponents : .hourAndMinute)
-            Spacer()
         }
         .padding()
     }
@@ -70,6 +72,6 @@ struct DateComponentView2_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        DateComponentView2()
+        DateComponentView2().previewDevice("iPhone 12 Pro")
     }
 }
