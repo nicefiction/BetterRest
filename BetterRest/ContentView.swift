@@ -10,7 +10,7 @@ struct ContentView: View {
      // ////////////////////////
     //  MARK: PROPERTY WRAPPERS
     
-    @State private var wakeUpTime: Date = Date()
+    @State private var wakeUpTime: Date = defaultWakeUpTime
     @State private var sleepAmount: Double = 8.00
     @State private var coffeeAmount: Int = 0
     @State private var alertTitle: String = ""
@@ -22,31 +22,48 @@ struct ContentView: View {
      // /////////////////////////
     //  MARK: COMPUTED PROPERTIES
     
+    static var defaultWakeUpTime: Date {
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 7
+        dateComponents.minute = 0
+        // Converts those components into a full date :
+        return Calendar.current.date(from : dateComponents) ?? Date()
+    }
+    
+    
     var body: some View {
         
         NavigationView {
-            VStack {
-                Text("— Wake Up Time —")
-                    .font(.headline)
-                DatePicker("I would like to wake up at :" ,
-                           selection : $wakeUpTime ,
-                           displayedComponents : .hourAndMinute)
-                Text("— Desired Amount of Sleep —")
-                    .font(.headline)
-                Stepper(value : $sleepAmount ,
-                        in : 4...12 ,
-                        step : 0.25) {
-                    Text("I need \(sleepAmount , specifier: "%g") hours of sleep 🛌")
+            Form {
+                VStack(alignment: .leading) {
+                    Text("Wake Up Time")
+                        .font(.headline)
+                    DatePicker("I would like to wake up at :" ,
+                               selection : $wakeUpTime ,
+                               displayedComponents : .hourAndMinute)
                 }
-                Text("— Daily Coffee Intake —")
-                    .font(.headline)
-                Stepper(value : $coffeeAmount ,
-                        in : 0...20 ,
-                        step : 1 ) {
-                    Text("Today I had \(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee ☕️")
+                
+                VStack(alignment: .leading) {
+                    Text("Desired Amount of Sleep")
+                        .font(.headline)
+                    Stepper(value : $sleepAmount ,
+                            in : 4...12 ,
+                            step : 0.25) {
+                        Text("I need \(sleepAmount , specifier: "%g") hours of sleep 🛌")
+                    }
+                }
+                
+                VStack(alignment : .leading) {
+                    Text("Daily Coffee Intake")
+                        .font(.headline)
+                    Stepper(value : $coffeeAmount ,
+                            in : 0...20 ,
+                            step : 1 ) {
+                        Text("Today I had \(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee ☕️")
+                    }
                 }
             }
-            .padding()
             .navigationBarTitle(Text("Better Rest"))
             /**
              `NOTE`: If we add the parentheses after `calculateBedtime`
