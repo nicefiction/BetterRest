@@ -13,6 +13,9 @@ struct ContentView: View {
     @State private var wakeUpTime: Date = Date()
     @State private var sleepAmount: Double = 8.00
     @State private var coffeeAmount: Int = 0
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+    @State private var isShowingAlert: Bool = false
     
     
     
@@ -58,6 +61,11 @@ struct ContentView: View {
             .navigationBarItems(trailing : Button(action : calculateBedtime , label : {
                 Text("Calculate Bedtime")
             }))
+            .alert(isPresented: $isShowingAlert) {
+                Alert(title : Text(alertTitle) ,
+                      message : Text(alertMessage) ,
+                      dismissButton : .default(Text("OK")))
+            }
         }
     }
     
@@ -65,7 +73,42 @@ struct ContentView: View {
      // ////////////////////
     //  MARK: HELPERMETHODS
     
-    func calculateBedtime() {}
+    func calculateBedtime() {
+        // STEP 1 •  create an instance of the SleepCalculator class :
+        let sleepCalculatorModel = SleepCalculator()
+        
+        // STEP 2 • Calculate the wake time :
+        let dateComponents =
+            Calendar.current.dateComponents([.hour , .minute],
+                                            from : wakeUpTime)
+        let hourInSeconds = (dateComponents.hour ?? 0) * 60 * 60
+        let minuteInSeconds = (dateComponents.minute ?? 0) * 60
+        
+        // STEP 3 • Feed our values into Core ML and see what comes out . This might fail if Core ML hits some sort of problem , so we need to use do and catch :
+        do {
+            let sleepPrediction =
+                try sleepCalculatorModel.prediction(wake: Double(hourInSeconds + minuteInSeconds) ,
+                                                    estimatedSleep : sleepAmount ,
+                                                    coffee : Double(coffeeAmount))
+            
+            // STEP 4 • Convert the sleep prediction to the time they should go to bed :
+            let sleepTime = wakeUpTime - sleepPrediction.actualSleep
+            
+            // STEP 5 • Show the bedtime in a human readable format to the user :
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeStyle = .short
+            alertTitle = "Your ideal bedtime is ..."
+            alertMessage = dateFormatter.string(from: sleepTime)
+            
+        } catch {
+            alertTitle = "Error"
+            alertMessage = "There was an error calculating your bedtime ."
+        }
+        
+        
+        isShowingAlert = true
+        
+    }
 }
 
 
