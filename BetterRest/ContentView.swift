@@ -34,7 +34,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        NavigationView {
+        return NavigationView {
             Form {
                 Section(header : Text("Wake Up Time")) {
                 // VStack(alignment: .leading) {
@@ -77,7 +77,15 @@ struct ContentView: View {
                 }
                 
                 Section(header : Text("Your Recommended Bedtime")) {
-                    
+                    HStack {
+                        Spacer()
+                        Text(calculatedBedtime)  // DAY 28 : CHALLENGE 3
+                        // Text(calculateBedtime()) // DAY 28 : CHALLENGE 3
+                            .font(.largeTitle)
+                            .bold()
+                        Spacer()
+                    }
+                    .padding(.vertical)
                 }
             }
             .navigationBarTitle(Text("Better Rest"))
@@ -91,14 +99,14 @@ struct ContentView: View {
              we are telling Swift to run that method when the button is tapped , and nothing more ;
              it won’t return anything that should then be run .
              */
-            .navigationBarItems(trailing : Button(action : calculateBedtime , label : {
-                Text("Calculate Bedtime")
-            }))
-            .alert(isPresented: $isShowingAlert) {
-                Alert(title : Text(alertTitle) ,
-                      message : Text(alertMessage) ,
-                      dismissButton : .default(Text("OK")))
-            }
+//            .navigationBarItems(trailing : Button(action : calculateBedtime , label : {
+//                Text("Calculate Bedtime")
+//            }))
+//            .alert(isPresented: $isShowingAlert) {
+//                Alert(title : Text(alertTitle) ,
+//                      message : Text(alertMessage) ,
+//                      dismissButton : .default(Text("OK")))
+//            }
         }
     }
     
@@ -106,7 +114,10 @@ struct ContentView: View {
      // ////////////////////
     //  MARK: HELPERMETHODS
     
-    func calculateBedtime() {
+    // DAY 28 : CHALLENGE 3
+    var calculatedBedtime: String {
+    // func calculateBedtime()
+    // -> String {
         // STEP 1 •  create an instance of the SleepCalculator class :
         let sleepCalculatorModel = SleepCalculator()
         
@@ -133,17 +144,18 @@ struct ContentView: View {
             // STEP 6 • Convert the date to a String using DateFormatter() :
             let dateFormatter = DateFormatter()
             dateFormatter.timeStyle = .short
-            alertTitle = "Your ideal bedtime is ..."
-            alertMessage = dateFormatter.string(from : sleepTime)
+            // alertTitle = "Your ideal bedtime is ..."
+            // alertMessage = dateFormatter.string(from : sleepTime)
+            return dateFormatter.string(from : sleepTime) // DAY 28 : CHALLENGE 3
             
         } catch {
-            alertTitle = "Error"
-            alertMessage = "There was an error calculating your bedtime ."
+            // alertTitle = "Error"
+            // alertMessage = "There was an error calculating your bedtime ."
+            return "There was an error calculating your bedtime ."  // DAY 28 : CHALLENGE 3
         }
         
         
-        isShowingAlert = true
-        
+        // isShowingAlert = true
     }
 }
 
