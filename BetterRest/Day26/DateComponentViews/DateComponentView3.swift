@@ -1,5 +1,6 @@
 //  DateComponentView3.swift
 // SOURCE : https://www.hackingwithswift.com/books/ios-swiftui/working-with-dates
+// SOURCE via PASAN : https://nsscreencast.com/episodes/367-dates-and-times
 
 import SwiftUI
 
@@ -14,6 +15,11 @@ import SwiftUI
  Swift gives us a specific type to do most of the work for us .
  This time it is called `DateFormatter` ,
  and it lets us convert a date into a string in a variety of ways .
+ */
+/**
+ `dateFormat` allows us to specify a precise format for our dates ,
+ whereas `dateStyle` has a selection of built-in formats
+ that match the user's settings .
  */
 
 struct DateComponentView3: View {

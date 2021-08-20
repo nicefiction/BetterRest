@@ -1,14 +1,15 @@
 // MARK: ContentView.swift
 // SOURCE : https://www.hackingwithswift.com/books/ios-swiftui/building-a-basic-layout
 
+// MARK: - LIBRARIES -
+
 import SwiftUI
 
 
 
 struct ContentView: View {
     
-     // ////////////////////////
-    //  MARK: PROPERTY WRAPPERS
+     // MARK: - PROPERTY WRAPPERS
     
     @State private var wakeUpTime: Date = defaultWakeUpTime
     @State private var sleepAmount: Double = 8.00
@@ -19,8 +20,7 @@ struct ContentView: View {
     
     
     
-     // /////////////////////////
-    //  MARK: COMPUTED PROPERTIES
+     // MARK: - COMPUTED PROPERTIES
     
     static var defaultWakeUpTime: Date {
         
@@ -54,8 +54,8 @@ struct ContentView: View {
                             step : 0.25) {
                         Text("I need \(sleepAmount , specifier: "%g") hours of sleep 🛌")
                     }
+                    .accessibility(value: Text("\(sleepAmount , specifier: "%g") hours of sleep"))
                 }
-                
                 Section(header : Text("Daily Coffee Intake")) {
                 // VStack(alignment : .leading) {
                     // Text("Daily Coffee Intake")
@@ -111,24 +111,23 @@ struct ContentView: View {
     }
     
     
-     // ////////////////////
-    //  MARK: HELPERMETHODS
+     // MARK: - HELPERMETHODS
     
-    // DAY 28 : CHALLENGE 3
+    /// DAY 28 : CHALLENGE 3
     var calculatedBedtime: String {
     // func calculateBedtime()
     // -> String {
-        // STEP 1 •  create an instance of the SleepCalculator class :
+        /// STEP 1 •  create an instance of the SleepCalculator class :
         let sleepCalculatorModel = SleepCalculator()
         
-        // STEP 2 • Store the individual parts of a date as separate values :
+        /// STEP 2 • Store the individual parts of a date as separate values :
         let components =
             Calendar.current.dateComponents([.hour , .minute] ,
                                             from : wakeUpTime)
         let hourInSeconds = (components.hour ?? 0) * 60 * 60
         let minuteInSeconds = (components.minute ?? 0) * 60
         
-        // STEP 3 • Feed our values into Core ML and see what comes out . Since this might fail , we need to use do and catch :
+        /// STEP 3 • Feed our values into Core ML and see what comes out :
         do {
             let sleepPrediction =
                 try sleepCalculatorModel.prediction(
@@ -138,10 +137,10 @@ struct ContentView: View {
                     coffee : Double(coffeeAmount)
                 )
             
-            // STEP 5 • Convert the sleep prediction to the time they should go to bed :
+            /// STEP 5 • Convert the sleep prediction to the time they should go to bed :
             let sleepTime = wakeUpTime - sleepPrediction.actualSleep
             
-            // STEP 6 • Convert the date to a String using DateFormatter() :
+            /// STEP 6 • Convert the date to a String using DateFormatter() :
             let dateFormatter = DateFormatter()
             dateFormatter.timeStyle = .short
             // alertTitle = "Your ideal bedtime is ..."
@@ -163,8 +162,7 @@ struct ContentView: View {
 
 
 
- // ///////////////
-//  MARK: PREVIEWS
+ // MARK: - PREVIEWS -
 
 struct ContentView_Previews: PreviewProvider {
     
