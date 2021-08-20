@@ -68,6 +68,8 @@
 		098384E02622CA3300E80780 /* BetterRest */ = {
 			isa = PBXGroup;
 			children = (
+				098384E12622CA3300E80780 /* BetterRestApp.swift */,
+				098384EA2622CA3600E80780 /* Info.plist */,
 				098384F42622CD7500E80780 /* Day26 */,
 				098384E32622CA3300E80780 /* ContentView.swift */,
 				09C650E92624424900F23656 /* SleepCalculator.mlmodel */,
@@ -88,8 +90,6 @@
 		098384F42622CD7500E80780 /* Day26 */ = {
 			isa = PBXGroup;
 			children = (
-				098384E12622CA3300E80780 /* BetterRestApp.swift */,
-				098384EA2622CA3600E80780 /* Info.plist */,
 				09E63E792622E41D002E68C5 /* DatePickerViews */,
 				09E63E842622F4C7002E68C5 /* DateComponentViews */,
 				098384F12622CD6A00E80780 /* StepperView.swift */,

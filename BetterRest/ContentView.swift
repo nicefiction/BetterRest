@@ -65,6 +65,7 @@ struct ContentView: View {
                             step : 1 ) {
                         Text("\(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee ☕️")
                     }
+                    .accessibility(value: Text("\(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee"))
                 }
                 
                 Section(header : Text("Daily Coffee Intake")) {
@@ -74,6 +75,7 @@ struct ContentView: View {
                             Text("\(number)")
                         }
                     }
+                    .accessibility(value: Text("\(coffeeAmount) \(coffeeAmount == 1 ? "cup" : "cups") of coffee"))
                 }
                 
                 Section(header : Text("Your Recommended Bedtime")) {
